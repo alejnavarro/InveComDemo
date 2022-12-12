@@ -1,0 +1,83 @@
+﻿<Window x:Class="InveComv1.Views.ValidarUsuario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InveComv1.Views" 
+        xmlns:viewmodel="clr-namespace:InveComv1.ViewModels"
+        xmlns:e="http://schemas.microsoft.com/xaml/behaviors" 
+        xmlns:behaviors="clr-namespace:InveComv1.Behaviors"
+        xmlns:my ="clr-namespace:InveComv1.CustomProperties"
+        mc:Ignorable="d"
+        Title="UserLogin" Height="200" Width="300"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Border CornerRadius="20" Background="Snow">
+        <Grid>
+
+            <!--#region Region Columnas y Ventanas -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition/>
+                <RowDefinition Height="15"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <!--#endregion-->
+
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="VALIDACION" FontSize="35"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Datos de Usuario"
+                   FontSize="10" FontStyle="Oblique" HorizontalAlignment="Center"
+                   Height="15"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="1" Width="100" Height="15"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                       Margin="30,0,0,0" Text="Usuario:"/>
+
+            <TextBox Grid.Row="4" Grid.Column="1" Width="100" Height="15"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" 
+                       Margin="100,0,0,0" Text="{Binding Usuario}" IsReadOnly="True"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="1" Width="100" Height="15"
+                       VerticalAlignment="Top" HorizontalAlignment="Left" 
+                       Margin="30,0,0,0" Text="Clave:"/>
+
+            <PasswordBox Grid.Row="5" Grid.Column="1" Width="100" Height="15"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" 
+                       Margin="100,0,0,0" PasswordChar="*"
+                         PasswordChanged="PasswordBox_PasswordChanged">
+                <e:Interaction.Behaviors>
+                    <behaviors:EnterNextFocusBehaviorPass />
+                </e:Interaction.Behaviors>
+            </PasswordBox>
+
+            <Button Grid.Row="6" Grid.Column="1" Width="80" Height="20" 
+                    Content="Validar" VerticalContentAlignment="Center"
+                    HorizontalAlignment="Right" Margin="0,0,50,0"
+                    my:ButtonHelper.DialogResult="True"
+                    Command="{Binding ViewCommand}" CommandParameter="validar"/>
+
+
+            <Button Grid.Row="6" Grid.Column="1" Width="80" Height="20" 
+                    Content="Cancelar" VerticalContentAlignment="Center"
+                    HorizontalAlignment="Left" Margin="50,0,0,0"
+                    Command="{Binding ViewCommand}" CommandParameter="cancelar"/>
+        </Grid>
+
+
+    </Border>
+</Window>

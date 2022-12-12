@@ -1,0 +1,167 @@
+﻿<Page x:Class="InveComv1.Views.VistaDetalladaVenta"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InveComv1.Views" 
+      xmlns:viewmodels="clr-namespace:InveComv1.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="530" d:DesignWidth="800"
+      Title="VistaDetalladaVenta">
+    
+    <Page.DataContext>
+        <viewmodels:VistaDetalladaVentaViewModel/>
+    </Page.DataContext>
+    
+    <Grid Background="Snow">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="8"
+                Width="100"
+                HorizontalAlignment="Right"
+                Content="Cerrar"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding ViewCommand}" CommandParameter="cerrar">
+        </Button>
+        <!--#region Muestreo de detalles de venta -->
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8"
+               Content="Informacion General de la Venta" FontSize="20" 
+               HorizontalContentAlignment="Center"/>
+        <!--#region Cedula -->
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Cedula:" FontSize="14"/>
+        <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="2" Text="{Binding DetalleVenta.DetallePago.CedulaCliente}"/>
+        <!--#endregion-->
+
+        <!--#region Numero de recibo -->
+        <TextBlock Grid.Row="3" Grid.Column="4" Text="Recibo No:" FontSize="14"/>
+        <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="5" Text="{Binding DetalleVenta.DetallePago.FacturaNo}"/>
+        <!--#endregion-->
+
+        <!--#region Fecha de Venta -->
+        <TextBlock Grid.Row="3" Grid.Column="7" Text="Fecha Venta:" FontSize="14"/>
+        <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="8" Text="{Binding DetalleVenta.DetallePago.Fecha}"/>
+        <!--#endregion-->
+
+        <!--#region Total de Venta -->
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="Total Venta:" FontSize="14"/>
+        <TextBox Grid.Row="5" IsReadOnly="True" Grid.Column="2" Text="{Binding DetalleVenta.DetallePago.TotalVenta}"/>
+        <!--#endregion-->
+
+        <!--#region IVA de Venta -->
+        <TextBlock Grid.Row="5" Grid.Column="4" Text="IVA:" FontSize="14"/>
+        <TextBox Grid.Row="5" IsReadOnly="True" Grid.Column="5" Text="{Binding DetalleVenta.DetallePago.IVA}"/>
+        <!--#endregion-->
+
+        <!--#region Tasa del dia de Venta -->
+        <TextBlock Grid.Row="5" Grid.Column="7" Text="Tasa del dia:" FontSize="14"/>
+        <TextBox Grid.Row="5" IsReadOnly="True" Grid.Column="8" Text="{Binding DetalleVenta.DetallePago.TasaDia}"/>
+        <!--#endregion-->
+
+        <!--#region Tasa del dia de Venta -->
+        <TextBlock Grid.Row="7" Grid.Column="4" Text="Total USD:" FontSize="14"/>
+        <TextBox Grid.Row="7" IsReadOnly="True" Grid.Column="5" Text="{Binding DetalleVenta.DetallePago.TotalUSD}"/>
+        <!--#endregion-->
+
+        <!--#endregion-->
+
+        <!--#region Informacion detallada del pago -->
+        <Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="8"
+               Content="Informacion Detallada del pago" FontSize="20" 
+               HorizontalContentAlignment="Center"/>
+
+        <!--#region Total Efectivo USD -->
+        <TextBlock Grid.Row="11" Grid.Column="1" Text="Efectivo USD:" FontSize="14"/>
+        <TextBox Grid.Row="11" IsReadOnly="True" Grid.Column="2" Text="{Binding DetalleVenta.DetallePago.TotalEfectivoUSD}"/>
+        <!--#endregion-->
+
+        <!--#region Total Efectivo BS -->
+        <TextBlock Grid.Row="11" Grid.Column="4" Text="Efectivo Bs:" FontSize="14"/>
+        <TextBox Grid.Row="11" IsReadOnly="True" Grid.Column="5" Text="{Binding DetalleVenta.DetallePago.TotalEfectivoBsF}"/>
+        <!--#endregion-->
+
+        <!--#region Total Tarjeta -->
+        <TextBlock Grid.Row="11" Grid.Column="7" Text="Tarjetas:" FontSize="14"/>
+        <TextBox Grid.Row="11" IsReadOnly="True" Grid.Column="8" Text="{Binding DetalleVenta.DetallePago.TotalTarjeta}"/>
+        <!--#endregion-->
+
+        <!--#region Total Tarjeta -->
+        <TextBlock Grid.Row="13" Grid.Column="4" Text="Otras:" FontSize="14"/>
+        <TextBox Grid.Row="13" IsReadOnly="True" Grid.Column="5" Text="{Binding DetalleVenta.DetallePago.TotalOtras}"/>
+        <!--#endregion-->
+        
+        <!--#endregion-->
+
+        <!--#region Detalle productos de Venta -->
+        <Label Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="8"
+               Content="Informacion Detallada de los productos vendidos" FontSize="20" 
+               HorizontalContentAlignment="Center"/>
+        <!--#endregion-->
+
+        <!--#region Region Data Grid informacion de ventas -->
+        <DataGrid Grid.Row="17"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="8"
+                  x:Name="GridProductos"
+                  FontSize="15"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserResizeRows="False"
+                  CanUserResizeColumns="False"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="#008ba2"
+                  HorizontalContentAlignment="Center"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  ItemsSource="{Binding DetalleProductos}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Factura No" Width="175" 
+                                    Binding="{Binding FacturaNo}"/>
+                <DataGridTextColumn Header="Codigo" Width="125"
+                                    Binding="{Binding Codigo}"/>
+                <DataGridTextColumn Header="Nombre" Width="160" 
+                                    Binding="{Binding Nombre}"/>
+                <DataGridTextColumn Header="Precio" Width="100" 
+                                    Binding="{Binding Precio}"/>
+                <DataGridTextColumn Header="Cantidad" Width="90" 
+                                    Binding="{Binding CantidadProducto}"/>
+                <DataGridTextColumn Header="Total" Width="100" 
+                                    Binding="{Binding TotalProducto}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--#endregion-->
+    </Grid>
+</Page>

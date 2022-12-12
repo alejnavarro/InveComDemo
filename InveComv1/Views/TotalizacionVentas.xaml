@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="InveComv1.Views.TotalizacionVentas"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InveComv1.Views" xmlns:viewmodels="clr-namespace:InveComv1.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewmodels:TotalizacionVentasViewModel/>
+    </UserControl.DataContext>
+    
+    <Border CornerRadius="10"
+            Background="Snow">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <!--#region Region Header -->
+
+            <!--#region Titulo -->
+            <TextBlock Grid.Column="1"
+                       Text="Modulo de Cierre de Caja"
+                       FontSize="20"
+                       FontWeight="DemiBold">
+            </TextBlock>
+
+            <!--#endregion-->
+
+            <!--#region CERRAR -->
+            <Border CornerRadius="15"
+                    Background="#ccc2c2"
+                    Width="100"
+                    HorizontalAlignment="Right"
+                    Grid.Column="3">
+                <Button Content="Cerrar"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         Width="100"
+                         Command="{Binding ViewCommand}" CommandParameter="cerrar">
+                </Button>
+            </Border>
+            <!--#endregion-->
+            <!--#endregion-->
+
+            <!--#region Region Data Grid Productis -->
+            <DataGrid Grid.Row="1"
+                      Margin="0,20,0,0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        Grid.RowSpan="2"
+                        x:Name="GridProductos"
+                        FontSize="15"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserResizeRows="False"
+                        CanUserResizeColumns="False"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        HorizontalGridLinesBrush="#008ba2"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Products}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Codigo" Width="70"
+                                    Binding="{Binding Codigo}"/>
+                    <DataGridTextColumn Header="Nombre" Width="100" 
+                                        Binding="{Binding Nombre}"/>
+                    <DataGridTextColumn Header="Grupo" Width="100" 
+                                        Binding="{Binding NombreGrupo}"/>
+                    <DataGridTextColumn Header="Precio" Width="100" 
+                                        Binding="{Binding Precio}"/>
+                    <DataGridTextColumn Header="Descripcion" Width="*" 
+                                        Binding="{Binding Descripcion}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--#endregion-->
+
+            <!--#region Botones de la vista -->
+            <!--#region Imprimir cierre de venta -->
+            <Border CornerRadius="15"
+                    Background="#ccc2c2"
+                    Width="120"
+                    HorizontalAlignment="Center"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    Margin="350,0,0,0"
+                    Grid.Row="3"
+                    Height="35">
+                <Button Content="Imprimir"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         Width="100"
+                         Command="{Binding ViewCommand}" CommandParameter="imprimir">
+                </Button>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region Exportar a Excel -->
+            <Border CornerRadius="15"
+                    Background="#ccc2c2"
+                    Width="170"
+                    HorizontalAlignment="Center"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="3"
+                    Height="35">
+                <Button Content="Exportar Excel"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         Width="170"
+                         Command="{Binding ViewCommand}" CommandParameter="exportar">
+                </Button>
+            </Border>
+            <!--#endregion-->
+
+            <!--#endregion-->
+        </Grid>
+
+    </Border>
+</UserControl>

@@ -1,0 +1,129 @@
+﻿<Page x:Class="InveComv1.Views.BuscarProducto"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InveComv1.Views" xmlns:viexmodels="clr-namespace:InveComv1.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="530" d:DesignWidth="800"
+      Title="Buscador de Productos">
+
+    <Page.DataContext>
+        <viexmodels:BuscarProductosViewModel/>
+    </Page.DataContext>
+    
+    <Border CornerRadius="10"
+            Background="Snow">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <!--#region Region Header -->
+
+            <!--#region Titulo -->
+            <TextBlock Grid.Column="1"
+                       Text="Buscador de Productos"
+                       FontSize="20"
+                       FontWeight="DemiBold">
+            </TextBlock>
+
+            <!--#endregion-->
+
+            <!--#region CERRAR -->
+            <Border CornerRadius="15"
+                    Background="#ccc2c2"
+                    Width="100"
+                    HorizontalAlignment="Right"
+                    Grid.Column="3">
+                <Button Content="Cerrar"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         Width="100"
+                         Command="{Binding ViewCommand}" CommandParameter="cerrar">
+                </Button>
+            </Border>
+            <!--#endregion-->
+            <!--#endregion-->
+
+            <!--#region Panel de busqueda -->
+
+            <DockPanel Grid.Column="1"
+                       Grid.Row="1"
+                       Grid.ColumnSpan="3"
+                       LastChildFill="False"
+                       HorizontalAlignment="Center">
+                <TextBlock DockPanel.Dock="Left"
+                           Text="Codigo/Nombre Producto:"
+                           FontSize="20"
+                           VerticalAlignment="Center">
+                </TextBlock>
+                <TextBox Width="200"
+                         Margin="20,0,0,0"
+                         BorderBrush="Sienna"
+                         Height="30"
+                         VerticalContentAlignment="Center"
+                         FontSize="20"
+                         Text="{Binding CodigoBusqueda, Mode=TwoWay}">
+                </TextBox>
+                <Button Width="100"
+                        Height="30"
+                        Content="Buscar"
+                        FontSize="20"
+                        VerticalContentAlignment="Center"
+                        Margin="20,0,0,0"
+                        Command="{Binding ViewCommand}" CommandParameter ="buscar">
+                    
+                </Button>
+            </DockPanel>
+            
+            <!--#endregion-->
+
+            <!--#region Region Data Grid Productis -->
+            <DataGrid Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        Grid.RowSpan="2"
+                        x:Name="GridProductos"
+                        FontSize="15"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserResizeRows="False"
+                        CanUserResizeColumns="False"
+                        HeadersVisibility="Column"
+                        GridLinesVisibility="Horizontal"
+                        HorizontalGridLinesBrush="#008ba2"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Products}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Codigo" Width="70"
+                                    Binding="{Binding Codigo}"/>
+                    <DataGridTextColumn Header="Nombre" Width="100" 
+                                        Binding="{Binding Nombre}"/>
+                    <DataGridTextColumn Header="Grupo" Width="100" 
+                                        Binding="{Binding NombreGrupo}"/>
+                    <DataGridTextColumn Header="Precio" Width="100" 
+                                        Binding="{Binding Precio}"/>
+                    <DataGridTextColumn Header="Descripcion" Width="*" 
+                                        Binding="{Binding Descripcion}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--#endregion-->
+
+        </Grid>
+        
+    </Border>
+</Page>

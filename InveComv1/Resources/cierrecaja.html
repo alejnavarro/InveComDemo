@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body style="font-family: 'Times New Roman'">
+    <div align="center">
+        <hr />
+        <h2 align="center">MALATZY, C.A</h2>
+        <table width="1000" align="center">
+            <tr align="center">
+                <td>RIF: J-309537164</td>
+            </tr>
+            <tr align="center">
+                <td>TLF: 0212 9597307</td>
+            </tr>
+            <tr align="center">
+                <td>CIERRE DE CAJA</td>
+            </tr>
+            <tr align="center">
+                <td>Caja: 01</td>
+            </tr>
+            <tr align="center">
+                <td>Vendedor: @Usuario</td>
+            </tr>
+            <tr align="center">
+                <td>Fecha: @Fecha</td>
+                <td>Tasa Dia: @TasaDia</td>
+            </tr>
+        </table>
+        <hr />
+        <table width="1000">
+            <thead>
+                <tr>
+                    <th>Factura No</th>
+                    <th>Cedula</th>
+                    <th>Efect Bs</th>
+                    <th>Efect USD</th>
+                    <th>Tarjeta</th>
+                    <th>Otras</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @grid
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td align="right">Total:</td>
+                    <td>@TOTAL</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <table width="300">
+            <tr>
+                <td align="left">Total Efect BS:</td>
+                <td align="right">@EFECTBS</td>
+            </tr>
+            <tr>
+                <td align="left">Total Efect USD:</td>
+                <td align="right">@EFECTUSD</td>
+            </tr>
+            <tr>
+                <td align="left">Total Tarjetas:</td>
+                <td align="right">@TARJETAS</td>
+            </tr>
+            <tr>
+                <td align="left">Total Otras:</td>
+                <td align="right">@OTRAS</td>
+            </tr>
+        </table>
+
+       -- CIERRE DE CAJA FINALIZADO --
+        <hr />
+    </div>
+</body>
+</html>

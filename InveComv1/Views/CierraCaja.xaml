@@ -1,0 +1,273 @@
+﻿<UserControl x:Class="InveComv1.Views.CierraCaja"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my ="clr-namespace:InveComv1.CustomProperties"
+             xmlns:local="clr-namespace:InveComv1.Views" xmlns:viewmodel="clr-namespace:InveComv1.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="800"
+             Background="Transparent">
+
+    <UserControl.DataContext>
+        <viewmodel:CierreCajaViewModel/>
+    </UserControl.DataContext>
+
+    <Border CornerRadius="10"
+            Background="Snow">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <!--#region Region Header -->
+
+            <!--#region Titulo -->
+            <TextBlock Grid.Column="1"
+                       Text="Modulo de Cierre de Caja"
+                       FontSize="20"
+                       FontWeight="DemiBold">
+            </TextBlock>
+
+            <!--#endregion-->
+
+            <!--#region CERRAR -->
+            <Border CornerRadius="15"
+                    Background="#ccc2c2"
+                    Width="110"
+                    HorizontalAlignment="Right"
+                    Grid.Column="3">
+                <Button Content="Cancelar"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         Width="110"
+                         Command="{Binding ViewCommand}" CommandParameter="cancelar">
+                </Button>
+            </Border>
+            <!--#endregion-->
+            <!--#endregion-->
+
+            <!--#region Detalles del cierre de Caja -->
+
+            <!--#region Usuario del Cierre actual -->
+            <TextBlock Grid.Row="2"
+                       Grid.Column="1"
+                       Text="Usuario:"
+                       FontSize="30"
+                       Height="40"
+                       Width="110"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="2"
+                       Grid.Column="1"
+                       Text="{Binding CierreCaja.Usuario}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="150,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+            <!--#region Fecha del Cierre actual -->
+            <TextBlock Grid.Row="2"
+                       Grid.Column="3"
+                       Text="Fecha:"
+                       FontSize="30"
+                       Height="40"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="2"
+                       Grid.Column="3"
+                       Text="{Binding CierreCaja.Fecha}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="100,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+
+            <!--#region Efectivo Total de la venta -->
+            <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"
+                   Content="Efectivo Total del dia" FontSize="30"
+                   HorizontalAlignment="Center"/>
+            <!--#region Efectivo USD -->
+            <TextBlock Grid.Row="6"
+                       Grid.Column="3"
+                       Text="USD:"
+                       FontSize="30"
+                       Height="40"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="6"
+                       Grid.Column="3"
+                       Text="{Binding CierreCaja.EfectivoUSD}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="100,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+            <!--#region Efectivo BsF -->
+            <TextBlock Grid.Row="6"
+                       Grid.Column="1"
+                       Text="BsF:"
+                       FontSize="30"
+                       Height="40"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="6"
+                       Grid.Column="1"
+                       Text="{Binding CierreCaja.EfectivoBsF}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="100,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+            <!--#endregion-->
+
+            <!--#region Total otras formas de pago -->
+            <Label Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3"
+                   Content="Otras Formas de pago del dia" FontSize="30"
+                   HorizontalAlignment="Center"/>
+            <!--#region Otras formas de pago -->
+            <TextBlock Grid.Row="10"
+                       Grid.Column="3"
+                       Text="Otras:"
+                       FontSize="30"
+                       Height="40"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="10"
+                       Grid.Column="3"
+                       Text="{Binding CierreCaja.Otras}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="100,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+            <!--#region Tarjetas -->
+            <TextBlock Grid.Row="10"
+                       Grid.Column="1"
+                       Text="Tarjeta:"
+                       FontSize="30"
+                       Height="40"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="10"
+                       Grid.Column="1"
+                       Text="{Binding CierreCaja.Tarjeta}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="100,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+            <!--#endregion-->
+
+            <!--#region Totalizacion de las ventaso -->
+            <Label Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="3"
+                   Content="Totalizacion de las ventas del dia" FontSize="30"
+                   HorizontalAlignment="Center"/>
+            <!--#region Otras formas de pago -->
+            <TextBlock Grid.Row="14"
+                       Grid.Column="3"
+                       Text="Total:"
+                       FontSize="30"
+                       Height="40"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="14"
+                       Grid.Column="3"
+                       Text="{Binding CierreCaja.TotalVentas}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="100,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+            <!--#region Tarjetas -->
+            <TextBlock Grid.Row="14"
+                       Grid.Column="1"
+                       Text="Tasa Dia:"
+                       FontSize="30"
+                       Height="40"
+                       Width="115"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="14"
+                       Grid.Column="1"
+                       Text="{Binding CierreCaja.TasaDia}"
+                       FontSize="30"
+                       Height="40"
+                       Width="150"
+                       HorizontalAlignment="Left"
+                       Margin="120,0,0,0"
+                       VerticalAlignment="Top"/>
+            <!--#endregion-->
+            <!--#endregion-->
+            <!--#endregion-->
+
+            <!--#region Botones de la vista -->
+            <!--#region Cerrar caja-->
+            <Border CornerRadius="15"
+                    Background="#ccc2c2"
+                    Width="150"
+                    HorizontalAlignment="Right"
+                    Grid.Column="3"
+                    Grid.Row="15"
+                    Height="30">
+                <Button Content="Cerrar Caja"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         Width="150"
+                         my:ButtonHelper.DialogResult="True"
+                         Command="{Binding ViewCommand}" CommandParameter="cerrarcaja">
+                </Button>
+            </Border>
+            <!--#endregion-->
+            <!--#endregion-->
+        </Grid>
+
+    </Border>
+</UserControl>

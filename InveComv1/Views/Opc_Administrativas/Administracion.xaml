@@ -1,0 +1,242 @@
+﻿<UserControl x:Class="InveComv1.Views.Administracion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InveComv1.Views" 
+             xmlns:viewmodel="clr-namespace:InveComv1.ViewModels" 
+             xmlns:converters="clr-namespace:InveComv1.Converters"
+             mc:Ignorable="d"           
+             d:DesignHeight="600" d:DesignWidth="1000"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+
+    <UserControl.DataContext>
+        <viewmodel:AdministracionViewModel/>
+    </UserControl.DataContext>
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+            <converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Background="Snow">
+
+        <Grid>
+            <ContentControl Grid.Row="0"                           
+                            Grid.Column="0"
+                            Content="{Binding UserControl}">
+            </ContentControl>
+
+            <Grid Margin="0,40,0,0"
+              Visibility="{Binding VentanaAdminEnable}">
+
+
+                <!--#region Definicion de columnnas y ventanas -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <!--#endregion-->
+                <!--#region Botones -->
+                <DockPanel Grid.Column="0"
+                       Grid.Row="1"
+                           Grid.RowSpan="2"
+                       Grid.ColumnSpan="5"
+                       VerticalAlignment="Top"
+                       x:Name="homeDockPannel"
+                       Background="Transparent"
+                       LastChildFill="False"
+                       Visibility="{Binding BtnHomePageEnable}">
+
+                    <!--#region Regresar a Home -->
+                    <Border CornerRadius="15"
+                        Background="#ccc2c2"
+                        Margin="20,0,0,0">
+                        <Button DockPanel.Dock="Left"
+                            Width="100"
+                            Height="100"                          
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="regresar">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="/RCS/Img/home.png"
+                               Height="50"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"
+                               />
+                                <TextBlock Margin="0,5,0,0" Grid.Row="1" Text="Inicio" TextAlignment="Center"/>
+                            </Grid>
+
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+                    
+                    <!--#region Devoluciones -->
+                    <Border CornerRadius="15"
+                        Background="#ccc2c2"
+                        Margin="10,0,0,0">
+                        <Button DockPanel.Dock="Left"
+                            Width="100"
+                            Height="100"                          
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="devoluciones">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="/RCS/Img/devoluciones.png"
+                               Height="50"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"
+                               />
+                                <TextBlock Margin="0,5,0,0" Grid.Row="1" Text="Devoluciones" TextAlignment="Center"/>
+                            </Grid>
+
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+
+                    <!--#region Ventas -->
+                    <Border CornerRadius="15"
+                        Background="#ccc2c2"
+                        Margin="10,0,0,0">
+                        <Button DockPanel.Dock="Left"
+                            Width="100"
+                            Height="100" 
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="consultarventas">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="/RCS/Img/pos(2).png"
+                               Height="50"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"
+                               />
+                                <TextBlock Margin="0,5,0,0" Grid.Row="1" Text="Consultas" TextAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+
+                    <!--#region Reporte de Ventas -->
+                    <Border CornerRadius="15"
+                        Background="#ccc2c2"
+                        Margin="10,0,0,0">
+                        <Button DockPanel.Dock="Left"
+                            Width="100"
+                            Height="100" 
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="reporteventas">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="/RCS/Img/settings.png"
+                               Height="50"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"
+                               />
+                                <TextBlock Margin="0,5,0,0" Grid.Row="1" Text="Reporte   de   Ventas" TextAlignment="Center"
+                                           TextWrapping="Wrap"/>
+                            </Grid>
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+                    
+                    <!--#region Administrativa -->
+                    <Border CornerRadius="15"
+                        Background="#ccc2c2"
+                        Margin="10,0,0,0">
+                        <Button DockPanel.Dock="Left"
+                            Width="100"
+                            Height="100" 
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="administracion">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Image Source="/RCS/Img/settings.png"
+                               Height="50"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Stretch"
+                               />
+                                <TextBlock Margin="0,5,0,0" Grid.Row="1" Text="Adminitracion" TextAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+
+                </DockPanel>
+                <!--#endregion-->
+
+                <!--#region Configuracion de las pestans de la vitsa -->
+
+                <TabControl Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="4"
+                            Grid.RowSpan="2"
+                            ItemsSource="{Binding TabView}"
+                            SelectedIndex="{Binding Selected}">
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Header}"/>
+                                <Button Content="X" 
+                                        VerticalContentAlignment="Top"
+                                        Width="15"
+                                        VerticalAlignment="Center"
+                                        Command="{Binding DataContext.ViewCommand, 
+                                                  RelativeSource={RelativeSource 
+                                                  Mode=FindAncestor,
+                                                  AncestorType=UserControl} }"
+                                        CommandParameter="cerrar"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <Frame Content="{Binding TabContent}"/>
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+
+                <!--#endregion-->
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

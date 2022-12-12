@@ -1,0 +1,624 @@
+﻿<UserControl x:Class="InveComv1.Views.Ventas"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InveComv1.Views" 
+             xmlns:viewmodel="clr-namespace:InveComv1.ViewModels" 
+             xmlns:converters="clr-namespace:InveComv1.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+
+    <UserControl.DataContext>
+        <viewmodel:VentasViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BoolVisibilityConverter x:Key="BoolVisibilityConverter" />
+            <converters:StringVisibilityConverter x:Key="StringVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border CornerRadius="10"
+            Background="Snow">
+        <Grid>
+            <ContentControl Grid.Row="0"                           
+                            Grid.Column="0"
+                            Content="{Binding UserControl}">
+            </ContentControl>
+
+            <!--#region Icono de carga de datos -->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Height="400"
+                  Width="500"
+                  Background="Snow"
+                  Panel.ZIndex="1"
+                  Visibility="{Binding PopUpWindow}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+                <!--#region Calculo de tasa de cambio -->
+                <StackPanel Grid.Column="1"
+                            Grid.Row="1"
+                            Grid.RowSpan="2"
+                            AllowDrop="True"
+                            Visibility="{Binding IsBusy , Converter={StaticResource BoolVisibilityConverter}}">
+                    <fa:ImageAwesome 
+                                Margin="0,80,0,0"
+                                Grid.Column = "1"
+                                Grid.Row = "1"
+                                RenderSize="200,200"
+                                Foreground="LightGray"
+                                Icon="Spinner" Spin="True" Height="48" Width="48" />
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="2"
+                               TextWrapping="Wrap"
+                               Margin="0,50,0,30"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               TextAlignment="Center"
+                               Text="{Binding TextVentanaTasa}"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <DockPanel Grid.Column="1"
+                           Grid.Row="2"
+                           Height="90"
+                           VerticalAlignment="Bottom">
+                        <Button Height="30"
+                            Width="150"
+                            DockPanel.Dock="Bottom"
+                            Visibility="{Binding TextVentanaTasa, Converter={StaticResource StringVisibilityConverter}}"                           
+                            Content="ACEPTAR"
+                            Command="{Binding ViewCommand}" CommandParameter="guardartasa">
+                        </Button>
+                        <Label Width="50"
+                           Height="40"
+                           Margin="150,0,0,0"
+                           Background="Transparent"
+                           BorderBrush="Transparent"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center"
+                           FontSize="20"
+                           DockPanel.Dock="Left"
+                           Visibility="{Binding TextVentanaTasa, Converter={StaticResource StringVisibilityConverter}}"
+                           Content="BsF.:">
+                        </Label>
+                        <TextBox x:Name="TasaManual"
+                             Width="100"
+                             Height="40"
+                             Margin="0,0,150,0"
+                             Background="Transparent"
+                             BorderBrush="Gray"
+                             HorizontalContentAlignment="Left"
+                             VerticalContentAlignment="Center"
+                             FontSize="20"
+                             DockPanel.Dock="Right"                             
+                             Visibility="{Binding TextVentanaTasa, Converter={StaticResource StringVisibilityConverter}}"
+                             Text="{Binding TasaUSD}">
+                        </TextBox>
+                    </DockPanel>
+                </StackPanel>
+                <!--#endregion-->
+
+                <!--#region Cambiar cantidad de producto -->
+                <StackPanel Grid.Column="1"
+                            Grid.Row="1"
+                            Grid.RowSpan="2"
+                            AllowDrop="True"
+                            Visibility="{Binding EditCantidad, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <fa:ImageAwesome 
+                                Margin="0,80,0,0"
+                                Grid.Column = "1"
+                                Grid.Row = "1"
+                                RenderSize="200,200"
+                                Foreground="LightGray"
+                                Icon="Spinner" Spin="True" Height="48" Width="48" />
+                    <TextBlock Grid.Column="1"
+                               Grid.Row="2"
+                               TextWrapping="Wrap"
+                               Margin="0,50,0,30"
+                               FontSize="20"
+                               FontWeight="DemiBold"
+                               TextAlignment="Center"
+                               Text="{Binding TextVentanaTasa}"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center">
+                    </TextBlock>
+                    <DockPanel Grid.Column="1"
+                           Grid.Row="2"
+                           Height="100"
+                           VerticalAlignment="Bottom">
+                        <Button Height="30"
+                            Width="150"
+                            DockPanel.Dock="Bottom"                         
+                            Content="ACEPTAR"
+                            Command="{Binding ViewCommand}" CommandParameter="cambiarcantidad">
+                        </Button>
+                        <TextBox 
+                             Width="100"
+                             Height="40"
+                             Background="Transparent"
+                             BorderBrush="Gray"
+                             HorizontalContentAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             FontSize="20"
+                             DockPanel.Dock="Right"                             
+                             Text="{Binding CantidadProducto}">
+                        </TextBox>
+                    </DockPanel>
+                </StackPanel>
+                <!--#endregion-->
+
+
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Contenido Vantana Ventas -->
+            <Grid Visibility="{Binding VentanaVentasEnable}"
+                  Margin="0,40,0,0">
+                <!--#region Definicion de columnnas y ventanas -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <!--#endregion-->
+                <!--#endregion-->
+
+                <!--#region Regresar a Home -->
+                <Button Content="Regresar"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Height="20"
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Command="{Binding ViewCommand}" CommandParameter="regresar">
+                </Button>
+                <!--#endregion-->
+
+                <!--#region Cierre de Caja -->
+                <Button Content="Cerrar Caja"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Height="20"
+                        Width="100"
+                        Margin="120,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Command="{Binding ViewCommand}" CommandParameter="cierracaja">
+                </Button>
+                <!--#endregion-->
+                <!--#endregion-->
+                <!--#region Datos del cliente -->
+                <Border Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="4"
+                    CornerRadius="10"
+                    Background="WhiteSmoke" Margin="0,0.4,0,39.6" Grid.RowSpan="2">
+                    <Grid>
+                        <!--#region Columnas y filas seccion datos del cliente -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <!--#endregion-->
+
+                        <!--#region Cedula/Rif Cliente -->
+                        <Border Grid.Column="2"
+                            Grid.Row="1"
+                            Height="30"
+                            Width="300"
+                            CornerRadius="20"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="LightGray">
+                            <TextBox x:Name="TBCedula"
+                                 HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 Background="Transparent"
+                                 BorderBrush="Transparent"
+                                 Margin="15,0,0,0"                                 
+                                 Text="{Binding CedulaRifeCliente, Mode=TwoWay}">
+                            </TextBox>
+                        </Border>
+                        <TextBlock Grid.Row="1"
+                               Grid.Column="1"
+                               Text="Cedula/Rif:"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                        <!--#endregion-->
+
+                        <!--#region Telefono cliente -->
+                        <Border Grid.Column="5"
+                            Grid.Row="1"
+                            Height="30"
+                            Width="300"
+                            CornerRadius="20"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="LightGray">
+                            <TextBox HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 Background="Transparent"
+                                 Margin="15,0,0,0"                                 
+                                 BorderBrush="Transparent"
+                                 Text="{Binding TelefonoCliente, Mode=TwoWay}">
+                            </TextBox>
+                        </Border>
+                        <TextBlock Grid.Row="1"
+                               Grid.Column="4"
+                               Text="Telefono:"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                        <!--#endregion-->
+
+                        <!--#region Nombre cliente -->
+                        <Border Grid.Column="2"
+                            Grid.Row="3"
+                            Height="30"
+                            Width="300"
+                            CornerRadius="20"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="LightGray">
+                            <TextBox HorizontalContentAlignment="Left"
+                                  Margin="15,0,0,0"
+                                  VerticalContentAlignment="Center"
+                                  Background="Transparent"
+                                  BorderBrush="Transparent"
+                                 Text="{Binding NombreCliente, Mode=TwoWay}">
+                            </TextBox>
+                        </Border>
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="1"
+                               Text="Nombre:"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                        <!--#endregion-->
+
+                        <!--#region Direccion cliente -->
+                        <Border Grid.Column="5"
+                            Grid.Row="3"
+                            Height="30"
+                            Width="300"
+                            CornerRadius="20"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="LightGray">
+                            <TextBox HorizontalContentAlignment="Left"
+                                 VerticalContentAlignment="Center"
+                                 Background="Transparent"
+                                 BorderBrush="Transparent"
+                                 Margin="15,0,0,0"
+                                 Text="{Binding DireccionCliente, Mode=TwoWay}">
+                            </TextBox>
+                        </Border>
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="4"
+                               Text="Direccion:"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                        <!--#endregion-->
+                    </Grid>
+                </Border>
+                <!--#endregion-->
+
+                <!--#region Agregar producto a venta -->
+                <TextBox
+                Grid.Column="1"
+                Grid.Row="3"                 
+                Text="{Binding TBCodigoActual, Mode=TwoWay}">
+                </TextBox>
+                <Button Content="Agregar"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Height="30"
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    Margin="20,20.4,0,0"
+                    VerticalAlignment="Top"
+                    Command="{Binding ViewCommand}" CommandParameter="agregar">
+                </Button>
+                <!--#endregion-->
+
+                <!--#region Tase de cambio actual -->
+                <Label Content="{Binding TasaFechaUSD, UpdateSourceTrigger=PropertyChanged}"
+                       Grid.Row="4"
+                       Grid.Column="2"
+                       Height="40"
+                       Width="200"
+                       FontSize="20"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       HorizontalContentAlignment="Left"
+                       Margin="25,20,0,0"
+                       VerticalAlignment="Top" >
+                </Label>
+                <Label Content="Tasa del dia: "
+                       Grid.Row="4"
+                       Grid.Column="2"
+                       Height="40"
+                       Width="150"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Margin="24.6,20.4,0,0"
+                       VerticalAlignment="Top" />
+                <!--#endregion-->
+
+                <!--#region Botones de modificacion de venta -->
+                <DockPanel LastChildFill="False"
+                           Grid.Column="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Grid.Row="3" Grid.ColumnSpan="3" 
+                           Margin="330,0,0,0" >
+                    <!--#region Boton buscar -->
+                    <Border Width="100"
+                        Height="30"
+                        CornerRadius="20"
+                        Background="DarkGray"
+                        DockPanel.Dock="Left">
+                        <Button Content="Buscar"
+                            FontSize="20"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="buscar">
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+
+                    <!--#region Boton Cantidad -->
+                    <Border Width="100"
+                        Height="30"
+                        CornerRadius="20"
+                        Background="DarkGray"
+                        DockPanel.Dock="Left"
+                        Margin="15,0,0,0">
+                        <Button Content="Cantidad"
+                            FontSize="20"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="cantidad">
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+
+                    <!--#region Boton Eliminar -->
+                    <Border Width="100"
+                        Height="30"
+                        CornerRadius="20"
+                        Background="DarkGray"
+                        DockPanel.Dock="Left"
+                        Margin="15,0,0,0">
+                        <Button Content="Eliminar"
+                            FontSize="20"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding ViewCommand}" CommandParameter="eliminar">
+                        </Button>
+                    </Border>
+                    <!--#endregion-->
+
+                </DockPanel>
+                <!--#endregion-->
+
+                <!--#region Precio de venta y pago -->
+
+                <!--#region Subtotal -->
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="250"
+                   Height="60"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   HorizontalContentAlignment="Left"
+                   VerticalContentAlignment="Top"
+                   Content=" Subtotal BsF:"
+                   FontSize="40" Margin="0,0.4,0,0">
+                </Label>
+
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="250"
+                   Height="50"
+                   Margin="0,60.4,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Top"
+                   Content="{Binding Subtotal}"
+                   FontSize="30">
+                </Label>
+                <!--#endregion-->
+
+                <!--#region IVA -->
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="110"
+                   Height="80"
+                   Margin="0,100.4,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   HorizontalContentAlignment="Left"
+                   VerticalContentAlignment="Top"
+                   Content=" IVA:"
+                   FontSize="50">
+                </Label>
+
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="150"
+                   Height="50"
+                   Margin="0,120.4,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Top"
+                   Content="{Binding IVA}"
+                   FontSize="30">
+                </Label>
+                <!--#endregion-->
+
+                <!--#region Total -->
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="250"
+                   Height="70"
+                   Margin="0,160.4,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   HorizontalContentAlignment="Left"
+                   VerticalContentAlignment="Top"
+                   Content=" Total BsF:"
+                   FontSize="50">
+                </Label>
+
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="250"
+                   Height="50"
+                   Margin="0,220.4,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Top"
+                   Content="{Binding Total}"
+                   FontSize="30">
+                </Label>
+                <!--#endregion-->
+
+                <!--#region Total USD-->
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="250"
+                   Height="70"
+                   Margin="0,270.4,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   HorizontalContentAlignment="Left"
+                   VerticalContentAlignment="Top"
+                   Content=" Total USD:"
+                   FontSize="30">
+                </Label>
+
+                <Label Grid.Row="4"
+                   Grid.Column="4"
+                   Width="250"
+                   Height="50"
+                   Margin="0,270.4,0,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   HorizontalContentAlignment="Right"
+                   VerticalContentAlignment="Top"
+                   Content="{Binding TotalUSD}"
+                   FontSize="30"
+                       FontWeight="DemiBold">
+                </Label>
+                <!--#endregion-->
+
+                <!--#region Boton pagar -->
+                <Border Width="150"
+                    Height="50"
+                    CornerRadius="30"
+                    Background="IndianRed"
+                    Grid.Row="4"
+                    Grid.Column="4"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,20,0">
+                    <Button Content="Pagar"
+                        FontSize="30"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{Binding ViewCommand}" CommandParameter="pagar">
+                    </Button>
+                </Border>
+                <!--#endregion-->
+                <!--#endregion-->
+
+                <!--#region Datos de la Venta Actual -->
+                <DataGrid Grid.Row="4"
+                          Grid.Column="1"
+                          Grid.ColumnSpan="3"
+                          Width="auto"
+                          HorizontalAlignment="Stretch"
+                          x:Name="GridProductos"
+                          FontSize="15"
+                          Margin="0,70.4,0,0"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="True"
+                          CanUserResizeRows="False"
+                          CanUserResizeColumns="False"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          HorizontalGridLinesBrush="#008ba2"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          ItemsSource="{Binding ProductoVenta}"
+                          SelectedIndex ="{Binding SelectedProduct, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Codigo" Width="*"
+                                    Binding="{Binding Codigo}"/>
+                        <DataGridTextColumn Header="Nombre" Width="*" 
+                                     Binding="{Binding Nombre}"/>
+                        <DataGridTextColumn Header="Cantidad" Width="*" 
+                                     Binding="{Binding Cantidad}"/>
+                        <DataGridTextColumn Header="Precio Unitario" Width="*" 
+                                     Binding="{Binding Precio}"/>
+                        <DataGridTextColumn Header="Total" Width="*" 
+                                     Binding="{Binding PrecioTotal}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--#endregion-->
+            </Grid>
+
+        </Grid>
+
+    </Border>
+</UserControl>
